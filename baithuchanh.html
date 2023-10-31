@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h2>Thông tin học viên</h2>
+  <form action="#">
+    <label for="nameId">NameID</label>
+    <input type="text" name="nameId" id="nameId"><br>
+    <label for="name">Name</label>
+    <input type="text" name="name" id="name"><br>
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email"><br>
+    <label for="phone">Phone</label>
+    <input type="tel" name="phone" id="phone"><br>
+    <label for="address">Address</label>
+    <input type="text" name="address" id="address"><br>
+    <label for="sex">Sex</label>
+    <input type="radio" name="sex" id="nam" value="nam" checked>
+    <label for="">Male</label>
+    <input type="radio" name="sex" id="nu" value="nu">
+    <label for="">Female</label><br>
+    <input type="submit" value="Save" id="savebtn">
+  </form>
+  <h2>Danh sấch học viên</h2>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>NameId</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Address</th>
+        <th>Gender</th>
+        <th>Action</th>
+        <th><button>Sap xep(alpha b)</button></th>
+      </tr>
+    </thead>
+    <tbody id="content">
+
+    </tbody>
+  </table>
+  <script src="./thuchanh.js"></script>
+</body>
+
+</html>
