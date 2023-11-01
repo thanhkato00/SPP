@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { useFormik } from "formik";
 import axios from "axios";
@@ -10,7 +10,6 @@ import { useAuth } from "../auth-context";
 function Login() {
   const { login } = useAuth();
   const navigate = useNavigate();
-  const [data, setData] = useState([]);
   const url = "http://localhost:8000/user";
   const formik = useFormik({
     initialValues: {
@@ -19,9 +18,9 @@ function Login() {
     },
     validationSchema: Yup.object({
       email: Yup.string()
-        .email("emaii khong hop le")
-        .required("email khong duocc de trong"),
-      password: Yup.string().required("password khong duocc de trong"),
+        .email("Emaii Không hợp lệ")
+        .required("Email không được để trống"),
+      password: Yup.string().required("Password không được để trống"),
     }),
     onSubmit: async (values) => {
       try {
@@ -32,16 +31,16 @@ function Login() {
             user.email === values.email && user.password === values.password
         );
         if (user) {
-          toast.success("Dang nhap thanh cong");
+          toast.success("Đăng nhập thành công");
           navigate("/homepage");
           login(user);
           console.log(user);
           localStorage.setItem("user", JSON.stringify(user));
         } else {
-          toast.error("Dang nhap that bai");
+          toast.error("Đăng nhập thất bại");
         }
       } catch (err) {
-        console.error("loi khi dang nhap");
+        console.error("Lỗi khi đăng nhập");
       }
     },
   });

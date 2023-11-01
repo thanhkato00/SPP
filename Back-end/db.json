@@ -281,6 +281,21 @@
       "confirmPassword": "11111111",
       "username": "asdffadfas",
       "id": 3
+    },
+    {
+      "email": "Thanhkato00@gmail.com",
+      "password": "thanhkato",
+      "confirmPassword": "thanhkato",
+      "username": "thanhkato",
+      "id": 4
+    },
+    {
+      "useName": "",
+      "email": "Thanhkato00@gmail.com",
+      "password": "thanhkato",
+      "confirmPassword": "thanhkato",
+      "username": "thanh",
+      "id": 5
     }
   ]
 }

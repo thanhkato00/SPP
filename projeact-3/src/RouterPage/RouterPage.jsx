@@ -5,11 +5,9 @@ import UseInterfacePage from "../Components/UserInterfacePage";
 import Login from "../Components/Login+Resigter/Login";
 import Resigter from "../Components/Login+Resigter/Resigter";
 import HomePage from "../Components/HomePage";
-import Navbars from "../Components/Navbars/Navbars";
 import { useAuth } from "../Components/auth-context";
 
 function RouterPage() {
-  const { user } = useAuth();
   return (
     <div>
       <Routes>

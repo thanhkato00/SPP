@@ -1,9 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import "./product.css";
-import { ProductContext } from "../auth-context";
+
 
 function Product({ state }) {
-  const { products } = useContext(ProductContext);
   return (
     <>
       <section className="card-container .row-cols-3 ">

@@ -1,10 +1,8 @@
 import React from "react";
 import "./Recommended.css";
 import axios from "axios";
-import { useParams } from "react-router";
 function Recommended({ onSearch }) {
   const url = "http://localhost:8000/product";
-  const { id } = useParams();
   const handleCategorySearch = async (category) => {
     console.log(`Searching for category: ${category}`);
     await axios
@@ -20,7 +18,6 @@ function Recommended({ onSearch }) {
   };
   return (
     <div>
-      <h2 className="recommended-title"></h2>
       <div className="recommended-flex">
         <button
           className="btns"

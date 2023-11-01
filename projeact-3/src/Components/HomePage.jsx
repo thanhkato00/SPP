@@ -1,15 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbars from "./Navbars/Navbars";
 import axios from "axios";
 
-import { ProductContext, useAuth } from "./auth-context";
 import Product from "./Product/Product";
-import Button from "react-bootstrap/Button";
 import Sidebar from "./Sidebar/Sidebar";
 import Recommended from "./Recommended/Recommended";
 function HomePage() {
-  const { user, login } = useAuth();
-  const { products } = useContext(ProductContext);
   const [state, setState] = useState([]);
   const url = "http://localhost:8000/product";
 

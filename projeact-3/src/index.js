@@ -5,19 +5,17 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { AuthProvider, ProductProvider } from "./Components/auth-context";
+import { AuthProvider} from "./Components/auth-context";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <AuthProvider>
-    <ProductProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-      <ToastContainer />
-    </ProductProvider>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+    <ToastContainer />
   </AuthProvider>
 );
 
