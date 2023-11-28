@@ -4,7 +4,7 @@ import "./Sidebar.css";
 import { FaCartArrowDown } from "react-icons/fa";
 import Color from "./color_/Color";
 import Price from "./Price/Price";
-function Sidebar() {
+function Sidebar({onSearch}) {
   return (
     <>
       <section className="sidebar">
@@ -13,8 +13,8 @@ function Sidebar() {
             <FaCartArrowDown />
           </h1>
         </div>
-        <Price />
-        <Color />
+        <Price onSearch={onSearch}/>
+        <Color onSearch={onSearch}/>
       </section>
     </>
   );

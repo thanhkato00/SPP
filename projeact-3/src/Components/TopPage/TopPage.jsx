@@ -2,7 +2,6 @@ import React from "react";
 import Curesl from "./Curesl";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
-import Navbars from "../Navbars/Navbars";
 
 function TopPage() {
   const btnstyle = {

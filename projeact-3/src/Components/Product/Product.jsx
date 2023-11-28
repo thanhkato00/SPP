@@ -1,8 +1,9 @@
 import React from "react";
 import "./product.css";
 
+import Button from 'react-bootstrap/Button';
 
-function Product({ state }) {
+function Product({ state,addToCart }) {
   return (
     <>
       <section className="card-container .row-cols-3 ">
@@ -22,8 +23,9 @@ function Product({ state }) {
               </p>
             </div>
             <div className="card-footer">
-              <span className="card-price">{product.price} 円</span>
+              <span className="card-price">Price: {product.price} 円</span>
             </div>
+            <Button variant="success" onClick={()=>addToCart(product)}>Buy</Button>{' '}
           </div>
         ))}
       </section>

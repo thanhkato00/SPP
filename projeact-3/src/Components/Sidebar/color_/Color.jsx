@@ -1,16 +1,41 @@
-import React from "react";
-function Color() {
+import React, { useState } from "react";
+
+function Color({ onSearch }) {
+  const [selectedColor, setSelectedColor] = useState(null);
+
+  const handleColorFilters = (color) => {
+    console.log(color);
+
+    // Toggle the selected color
+    if (selectedColor === color) {
+      setSelectedColor(null);
+      onSearch({ color: null });
+    } else {
+      setSelectedColor(color);
+      onSearch({ color });
+    }
+  };
+
+  // Render buttons
+  const renderColorButtons = () => {
+    const colors = ["Black", "Green", "Yellow", "Orange", "Blue", "Purple", "Pink"];
+
+    return colors.map((color) => (
+      <button
+        key={color}
+        className={`btn ${selectedColor === color ? "selected" : ""}`}
+        onClick={() => handleColorFilters(color)}
+      >
+        {color}
+      </button>
+    ));
+  };
+
   return (
     <div>
       <div className="sidebar-container">
         <h2 className="sidebar-title price-title">Color</h2>
-        <button className="btn">Red</button>
-        <button className="btn">Green</button>
-        <button className="btn">Yellow</button>
-        <button className="btn">Orange</button>
-        <button className="btn">Blue</button>
-        <button className="btn">Purple</button>
-        <button className="btn">Pink</button>
+        {renderColorButtons()}
       </div>
     </div>
   );

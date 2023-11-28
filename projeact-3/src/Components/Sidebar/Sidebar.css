@@ -32,3 +32,8 @@
   margin-bottom: 10px;
 
 }
+/* Add this to your CSS file */
+.btn.selected {
+  background-color: #333; /* Choose the color you want for selected buttons */
+  color: #fff;
+}

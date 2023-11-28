@@ -10,7 +10,7 @@ function Resigter() {
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
-      useName: "",
+      userName: "",
       email: "",
       password: "",
       confirmPassword: "",

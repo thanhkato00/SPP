@@ -21,41 +21,49 @@ function Navbars() {
     logout();
     localStorage.removeItem("user");
 
-    console.log(user);
+    // console.log(user);
     navigate("/");
   };
-  console.log(user);
+  // console.log(user);
   return (
-    <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
-      <Container>
-        <Navbar.Brand href="#home">Supper Shoes</Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link as={Link} to="/">
-              Top Page
-            </Nav.Link>
-          </Nav>
-          <Nav>
-            {user ? (
-              <>
-                
-                <Nav.Link>{user.username}</Nav.Link>
-                
-                <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
-              </>
-            ) : (
-              <Navbar.Text>
-                <Button variant="outline-secondary" as={Link} to="/login">
-                  Đăng nhập
-                </Button>
-                <Button variant="outline-secondary">Đăng ký</Button>
-              </Navbar.Text>
-            )}
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+    <div className="supcontainer">
+      {" "}
+      <Navbar
+        collapseOnSelect
+        expand="lg"
+      >
+        <Container>
+          <Navbar.Brand className="colorchange" href="#home">Super Shoes</Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="me-auto">
+              <Nav.Link as={Link} to="/"className="colorchange" >
+                Top Page
+              </Nav.Link>
+            </Nav>
+            <Nav>
+              {user ? (
+                <>
+                  <button className="btn3">{user.username}</button>
+
+                  <button onClick={handleLogout}>Logout</button>
+                </>
+              ) : (
+                <Navbar.Text >
+                  {/* <Button variant="outline-secondary" as={Link} to="/login">
+                    Đăng nhập
+                  </Button>
+                  <Button variant="outline-secondary">Đăng ký</Button> */}
+                  <button className="btn3" onClick={()=>navigate("register")}>登録</button>
+                  <span> | </span>
+                  <button className="btn3" onClick={()=>navigate("/login")}>ログイン</button>                
+                </Navbar.Text>  
+              )}
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+    </div>
   );
 }
 

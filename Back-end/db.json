@@ -296,6 +296,14 @@
       "confirmPassword": "thanhkato",
       "username": "thanh",
       "id": 5
+    },
+    {
+      "userName": "",
+      "email": "thanh1234@gmail.com",
+      "password": "11111111",
+      "confirmPassword": "11111111",
+      "username": "thanhkato0000",
+      "id": 6
     }
   ]
 }

@@ -1,12 +1,15 @@
-
 import Navbars from "./Navbars/Navbars";
 import TopPage from "./TopPage/TopPage";
 
 function UseInterfacePage() {
   return (
     <div>
-      <Navbars />
+      {" "}
+      <div className="spcontainer">
+        <Navbars />
+      </div>
       <TopPage />
+
     </div>
   );
 }

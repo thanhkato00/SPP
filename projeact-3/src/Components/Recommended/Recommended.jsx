@@ -4,21 +4,29 @@ import axios from "axios";
 function Recommended({ onSearch }) {
   const url = "http://localhost:8000/product";
   const handleCategorySearch = async (category) => {
-    console.log(`Searching for category: ${category}`);
-    await axios
-      .get(`${url}/search?category=${category}`)
-      .then((response) => {
-        const searchResults = response.data;
-        console.log("Search results:", searchResults);
-        onSearch(searchResults);
-      })
-      .catch((error) => {
-        console.error("探すのがエラーです。", error);
-      });
-  };
+    // try {
+    //   console.log(`Searching for category: ${category}`);
+    //   const response = await axios.get(`${url}/?category=${category}`);
+    //   const searchResults = response.data;
+    //   console.log("Search results:", searchResults);
+    //   onSearch(category);
+    // } catch (error) {
+    //   console.error("Error searching for category:", error);
+    // }
+    if (category === "All Product") {
+      onSearch({
+        price:null,
+        color:null,
+        category:null,
+      }); // Truyền một đối tượng trống để hiển thị tất cả sản phẩm
+    } else {
+      onSearch({ category });
+    }  };
+
   return (
     <div>
       <div className="recommended-flex">
+        
         <button
           className="btns"
           onClick={() => handleCategorySearch("All Product")}
@@ -36,9 +44,9 @@ function Recommended({ onSearch }) {
         </button>
         <button
           className="btns"
-          onClick={() => handleCategorySearch("Sneaker")}
+          onClick={() => handleCategorySearch("Puma")}
         >
-          Sneaker
+          Puma
         </button>
         <button className="btns" onClick={() => handleCategorySearch("MLB")}>
           MLB

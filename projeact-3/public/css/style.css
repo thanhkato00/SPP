@@ -4,8 +4,9 @@
   box-sizing: border-box;
 }
 
-html {
-  color: #fafafa;
+html {  
+
+  
   font-size: 82.5%;
 }
 
@@ -108,4 +109,44 @@ html {
 #them {
   padding: 10px;
   font-size: 1.5em;
+}
+/* li{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+} */
+/* Trong phần CSS của bạn */
+.custom-tooltip.tooltip {
+  position: absolute;
+  width: 450px;
+  margin-right: 20px;
+  right: 0;
+  background-color: #000000;
+}
+
+.custom-tooltip.tooltip ul {
+  list-style-type: none;
+  padding: 0;
+  width: 450px;
+  text-align: left;
+  color: #000000;
+}
+
+.custom-tooltip.tooltip li {
+  overflow: hidden;
+  white-space: normal;
+  text-overflow: ellipsis;
+  font-size: 14px;
+  padding: 5px;
+  color: #000000;
+}
+.cartItemCount{
+  margin-left: 2rem;
+  position: absolute;
+  color: red;
+  margin-top: -4rem;
+  width: 3rem;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
 }
