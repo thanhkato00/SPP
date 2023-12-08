@@ -6,6 +6,7 @@ import Product from "./Product/Product";
 import Sidebar from "./Sidebar/Sidebar";
 import Recommended from "./Recommended/Recommended";
 import Search from "./Search+giohang/Search";
+import Footer from "./Footer/Footer";
 
 function HomePage() {
   const [state, setState] = useState([]);
@@ -45,6 +46,12 @@ function HomePage() {
       setFilters(updatedFilters);
     }
   };
+  const removeFromCart=(productToRemove)=>{
+    const updateCartItemList=cartItemsList.filter(item => item!==productToRemove);
+    const updateCartItems=cartItemsList.filter(item => item!==productToRemove);
+    setCartItems(updateCartItems);
+    setCartItemsList(updateCartItemList);
+  }
   //sử dụng useMemo để lưu lại những giá trị không thay đổi
   const searchResults = useMemo(() => {
     let filteredResults = state;
@@ -84,24 +91,31 @@ function HomePage() {
       // Nếu sản phẩm chưa tồn tại, thêm mới
       setCartItemsList([{ ...product, quantity: 1 }, ...cartItemsList]);
       setCartItems([{ ...product, quantity: 1 }, ...cartItems.slice(0, 4)]);
-      console.log(cartItems);
-      console.log(cartItemsList);
     }
   };
   console.log(cartItems);
+  console.log(cartItemsList);
   useEffect(() => {
     loadData();
   }, []);
   return (
-    <div className="spdcontainer">
-      <div className="spcontainer">
-        <Navbars />
-        <Search cartItems={cartItems} cartItemsList={cartItemsList} />
+    <div>
+      <div className="spdcontainer">
+        <header style={{background:"none"}}>
+          <div className="spcontainer">
+            <Navbars />
+            <Search cartItems={cartItems} cartItemsList={cartItemsList} removeFromCart={removeFromCart}/>
+          </div>
+        </header>
+        <section>
+          <Recommended onSearch={handleSearch} />
+          <Sidebar onSearch={handleSearch} />
+          <Product state={searchResults} addToCart={addToCart} />
+        </section>
+        <footer>
+          <Footer />
+        </footer>
       </div>
-{/* 
-      <Recommended onSearch={handleSearch} />
-      <Sidebar onSearch={handleSearch} />
-      <Product state={searchResults} addToCart={addToCart} /> */}
     </div>
   );
 }

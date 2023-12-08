@@ -2,7 +2,12 @@ import React from "react";
 import "./product.css";
 
 import Button from 'react-bootstrap/Button';
-
+function CurrencyDisplay({value,currency="JPY"}){
+  const formattedValue =value.toLocaleString("ja-JP");
+  return (
+    <span>{formattedValue} {currency}</span>
+  )
+}
 function Product({ state,addToCart }) {
   return (
     <>
@@ -23,7 +28,7 @@ function Product({ state,addToCart }) {
               </p>
             </div>
             <div className="card-footer">
-              <span className="card-price">Price: {product.price} 円</span>
+              <span className="card-price">Price: <CurrencyDisplay value={product.price}></CurrencyDisplay></span>
             </div>
             <Button variant="success" onClick={()=>addToCart(product)}>Buy</Button>{' '}
           </div>

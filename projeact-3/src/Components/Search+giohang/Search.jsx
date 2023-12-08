@@ -9,19 +9,33 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { useNavigate } from "react-router-dom";
 
-function Search({ cartItems ,cartItemsList}) {
+function Search({ cartItems, cartItemsList, removeFromCart }) {
   const userString = localStorage.getItem("user");
   const user = userString ? JSON.parse(userString) : null;
   const navigate = useNavigate();
   const [cartItemCount, setCartItemCount] = useState(0);
-  useEffect(()=>{
+  // Bên trong component Search của bạn
+  const [showCartTable, setShowCartTable] = useState(false);
+
+  const handleIconHover = () => {
+    setShowCartTable(true);
+  };
+
+  const handleIconLeave = () => {
+    setShowCartTable(false);
+  };
+
+  // Ngoài hàm Search
+
+  useEffect(() => {
     setCartItemCount(cartItemsList.length);
-  },[cartItems])
+  }, [cartItems]);
   const handleIconClick = () => {
     if (user) {
-      navigate("/");
+      console.log("ddax truyen nhwng san pham nafy vao", cartItemsList);
+      navigate("/cart", { state: { cartItemsList } });
     } else {
-     alert("ban chwa dang nhapus");
+      alert("ban chwa dang nhapus");
     }
   };
 
@@ -57,6 +71,13 @@ function Search({ cartItems ,cartItemsList}) {
                     }}
                   />
                   {item.company}
+                  <Button
+                    variant="danger"
+                    size="sm"
+                    onClick={() => removeFromCart(item)}
+                  >
+                    Xóa
+                  </Button>
                 </li>
               ))}
             </ul>
@@ -84,11 +105,19 @@ function Search({ cartItems ,cartItemsList}) {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <Form className="d-flex">
+            <Form
+              className="d-flex"
+              style={{
+                maxWidth: "400px",
+                backgroundColor: "white",
+                maxHeight: "50px",
+                margin: "auto",
+              }}
+            >
               <Form.Control
                 type="search"
                 placeholder="Tìm kiếm"
-                className="me-3 mx-5"
+                // className="me-3 mx-5"
                 style={{ width: "300px" }}
                 aria-label="Tìm kiếm"
               />
@@ -99,10 +128,12 @@ function Search({ cartItems ,cartItemsList}) {
             placement="bottom"
             delay={{ show: 250, hide: 400 }}
             overlay={renderTooltip}
+            show={showCartTable}
           >
             <Navbar.Text
               style={{
                 backgroundColor: "",
+                color: "#fff",
                 fontSize: "40px",
                 width: "50px",
                 height: "50px",
@@ -112,12 +143,12 @@ function Search({ cartItems ,cartItemsList}) {
                 marginRight: "3rem",
               }}
               onClick={() => handleIconClick()}
+              onMouseEnter={handleIconHover}
+              onMouseLeave={handleIconLeave}
             >
               <MdOutlineLocalGroceryStore />
-              {cartItemCount>=0&&(
-                <span className="cartItemCount" >
-                  {cartItemCount}
-                </span>
+              {cartItemCount >= 0 && (
+                <span className="cartItemCount">{cartItemCount}</span>
               )}
             </Navbar.Text>
           </OverlayTrigger>

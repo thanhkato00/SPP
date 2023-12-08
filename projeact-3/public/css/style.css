@@ -5,9 +5,7 @@
 }
 
 html {  
-
-  
-  font-size: 82.5%;
+  font-size: 86%;
 }
 
 .main {
@@ -144,9 +142,25 @@ html {
   margin-left: 2rem;
   position: absolute;
   color: red;
-  margin-top: -4rem;
-  width: 3rem;
+  border-radius: 80%;
+  background-color: #fff;
+  margin-top: -3rem;
+  width: 2.5rem;
+  height: 2rem;
   font-weight: bold;
   font-size: 20px;
   text-align: center;
+}
+/* Thêm đoạn mã CSS sau vào nơi bạn đang sử dụng CSS cho component này */
+
+/* Chọn thẻ li trong danh sách */
+ul li {
+  display: flex; /* Sử dụng flexbox để căn cứng các phần tử con */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  margin-bottom: 10px; /* Khoảng cách giữa các mục trong danh sách */
+}
+
+/* Chọn nút cộng và nút trừ */
+ul li button {
+  margin: 0 5px; /* Khoảng cách giữa nút cộng và nút trừ */
 }

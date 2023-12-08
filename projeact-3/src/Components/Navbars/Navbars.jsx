@@ -46,7 +46,7 @@ function Navbars() {
                 <>
                   <button className="btn3">{user.username}</button>
 
-                  <button onClick={handleLogout}>Logout</button>
+                  <button className="btn3" onClick={handleLogout}>Logout</button>
                 </>
               ) : (
                 <Navbar.Text >
@@ -54,7 +54,7 @@ function Navbars() {
                     Đăng nhập
                   </Button>
                   <Button variant="outline-secondary">Đăng ký</Button> */}
-                  <button className="btn3" onClick={()=>navigate("register")}>登録</button>
+                  <button className="btn3" onClick={()=>navigate("/resigter")} >登録</button>
                   <span> | </span>
                   <button className="btn3" onClick={()=>navigate("/login")}>ログイン</button>                
                 </Navbar.Text>  

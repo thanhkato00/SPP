@@ -6,6 +6,7 @@ import Login from "../Components/Login+Resigter/Login";
 import Resigter from "../Components/Login+Resigter/Resigter";
 import HomePage from "../Components/HomePage";
 import { useAuth } from "../Components/auth-context";
+import Cart from "../Components/Cart/Cart";
 
 function RouterPage() {
   return (
@@ -15,6 +16,8 @@ function RouterPage() {
         <Route path="/resigter" element={<Resigter />}></Route>
         <Route path="/" element={<UseInterfacePage />}></Route>
         <Route path="/homepage" element={<HomePage />}></Route>
+        <Route path="/cart" element={<Cart />}></Route>
+
       </Routes>
     </div>
   );

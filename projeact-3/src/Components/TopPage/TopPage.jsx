@@ -26,7 +26,7 @@ function TopPage() {
           Jordan
         </Button>{" "}
         <Button variant="warning" style={btnstyle}>
-          Sneaker
+          Puma
         </Button>{" "}
       </div>
     </div>
