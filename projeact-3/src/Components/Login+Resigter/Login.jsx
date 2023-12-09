@@ -18,9 +18,9 @@ function Login() {
     },
     validationSchema: Yup.object({
       email: Yup.string()
-        .email("Emaii Không hợp lệ")
-        .required("Email không được để trống"),
-      password: Yup.string().required("Password không được để trống"),
+        .email("メールエラー")
+        .required("メールアドレスを空白にしないでください"),
+      password: Yup.string().required("パスワードを空白にしないでください"),
     }),
     onSubmit: async (values) => {
       try {
@@ -31,16 +31,16 @@ function Login() {
             user.email === values.email && user.password === values.password
         );
         if (user) {
-          toast.success("Đăng nhập thành công");
+          toast.success("ログイン成功");
           navigate("/homepage");
           login(user);
           console.log(user);
           localStorage.setItem("user", JSON.stringify(user));
         } else {
-          toast.error("Đăng nhập thất bại");
+          toast.error("ログイン失敗");
         }
       } catch (err) {
-        console.error("Lỗi khi đăng nhập");
+        console.error("ログインエラー");
       }
     },
   });
@@ -49,11 +49,11 @@ function Login() {
     <div>
       <div className="main">
         <form onSubmit={formik.handleSubmit} className="form" id="form-2">
-          <h3 className="heading">Đăng Nhập</h3>
+          <h3 className="heading">ログイン</h3>
           <div className="spacer" />
           <div className="form-group">
             <label htmlFor="email" className="form-label">
-              Email
+              メールアドレス
             </label>
             <input
               value={formik.values.email}
@@ -71,7 +71,7 @@ function Login() {
           </div>
           <div className="form-group">
             <label htmlFor="password" className="form-label">
-              Mật khẩu
+              パスワード
             </label>
             <input
               value={formik.values.password}
@@ -80,20 +80,20 @@ function Login() {
               id="password"
               name="password"
               type="password"
-              placeholder="Nhập mật khẩu"
+              placeholder="パスワード入力"
               className="form-control"
             />
             {formik.touched.password && formik.errors.password && (
               <span className="form-message">{formik.errors.password}</span>
             )}
           </div>
-          <button className="form-submit">Đăng Nhập</button>
+          <button className="form-submit">ログイン</button>
           <div id="them">
             <span>
-              Chưa có tài khoản?{" "}
+              アカウントがありません？{" "}
               <span>
                 <button onClick={() => navigate("/resigter")}>
-                  Đăng ký tại đây!
+                  こちらに登録！
                 </button>
               </span>
             </span>

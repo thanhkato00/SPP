@@ -36,7 +36,7 @@ function Cart() {
     // Kiểm tra xem thông tin người mua đã được nhập đầy đủ hay chưa
     if (!firstName || !lastName || !email || !address || !phone) {
       // Thông báo lỗi hoặc hiển thị modal lỗi nếu cần
-      alert("Vui lòng điền đầy đủ thông tin người mua.");
+      alert("購入者情報を入力してください。");
       return;
     }
 
@@ -107,7 +107,7 @@ function Cart() {
   return (
     <div className="cart-container">
       <>
-        <h1>Ｓｕｐｅｒ　Ｓｈｏｓｅ</h1>
+        <h1>Ｓｕｐｅｒ　Ｓｈｏｅｓ</h1>
         <h3>1.Your Order</h3>
         {/* hiển thị danh sách trong giỏ hàng */}
 
@@ -176,7 +176,7 @@ function Cart() {
             </tr>
           </tfoot>
         </table>
-        <h3>2.Thông tin người mua</h3>
+        <h3>2.購入者情報</h3>
         <Form>
           <Row>
             <Col>
@@ -281,26 +281,26 @@ function Cart() {
         <div>
           <Modal show={showModal} onHide={handleCloseModal}>
             <Modal.Header closeButton>
-              <Modal.Title>Thông Tin Thanh Toán</Modal.Title>
+              <Modal.Title>請求情報</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <h3>Thanh toán thành công</h3>
-              <p>Thông tin người mua:</p>
+              <h3>支払い成功</h3>
+              <p>購入者情報:</p>
               <p>First name: {firstName}</p>
               <p>Last name: {lastName}</p>
-              <p>Email: {email}</p>
-              <p>Address: {address}</p>
-              <p>Phone: {phone}</p>
-              <p>Phương thức thanh toán: {selectedPaymentMethod}</p>
+              <p>メールアドレス: {email}</p>
+              <p>住所: {address}</p>
+              <p>電話番号: {phone}</p>
+              <p>支払方法: {selectedPaymentMethod}</p>
               <p>
-                Tổng giá tiền:{" "}
+                合計は{" "}
                 <CurrencyDisplay value={totalPrice}></CurrencyDisplay>
               </p>
               {/* ... (các thông tin khác như sản phẩm và tổng giá tiền) */}
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleCloseModal}>
-                Đóng
+                Close
               </Button>
               {/* Các nút khác nếu cần */}
             </Modal.Footer>
@@ -313,7 +313,7 @@ function Cart() {
             style={{ padding: "1rem", margin: "2rem" }}
             onClick={handlePayment}
           >
-            Thanh toán
+            注文する
           </Button>{" "}
           <CurrencyDisplay value={totalPrice}></CurrencyDisplay>
         </h2>
