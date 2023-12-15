@@ -16,27 +16,27 @@ function Resigter() {
       confirmPassword: "",
     },
     validationSchema: Yup.object({
-      username: Yup.string().required("Ten nguoi dung khong duoc de trong"),
+      username: Yup.string().required("ユーザー名を空白にすることはできません"),
       email: Yup.string()
-        .email("Email ko hop le")
-        .required("Email ko duoc de trong"),
+        .email("無効なメール")
+        .required("メールアドレスを空白にすることはできません"),
       password: Yup.string()
-        .min(8, "mat  khau phai co it nhat 8 ky tu")
-        .required("Password ko duoc de trong"),
+        .min(8, "パスワードは8文字以上である必要があります")
+        .required("パスワードを空白にすることはできません"),
       confirmPassword: Yup.string()
-        .oneOf([Yup.ref("password"), null], "mat khau khong trung khop")
-        .required("xac nhan mat khau khong duoc de trong"),
+        .oneOf([Yup.ref("パスワード"), null], "パスワードが一致していません")
+        .required("パスワードの確認を空にすることはできません"),
     }),
     onSubmit: (value) => {
       const url = "http://localhost:8000/user";
       axios
         .post(url, value)
         .then((res) => {
-          toast.success("Dang ky thanh cong");
+          toast.success("登録成功");
           navigate("/login");
         })
         .catch((err) => {
-          toast.error("Dang ky that bai");
+          toast.error("登録失敗");
         });
     },
   });
@@ -50,12 +50,12 @@ function Resigter() {
           id="form-1"
           onSubmit={formik.handleSubmit}
         >
-          <h3 className="heading">Đăng ký thành viên mới</h3>
-          <p className="desc">Chào mừng thành viên mới</p>
+          <h3 className="heading">新規会員登録</h3>
+          <p className="desc">新しいメンバー大歓迎</p>
           <div className="spacer" />
           <div className="form-group">
             <label htmlFor="username" className="form-label">
-              Họ và Tên
+              ユーザー名
             </label>
             <input
               name="username"
@@ -63,7 +63,7 @@ function Resigter() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               type="text"
-              placeholder="VD: Trần Văn A"
+              placeholder="VD: Gojo Satoru"
               className="form-control"
             />
             {formik.touched.username && formik.errors.username && (
@@ -89,7 +89,7 @@ function Resigter() {
           </div>
           <div className="form-group">
             <label htmlFor="password" className="form-label">
-              Mật khẩu
+            パスワード
             </label>
             <input
               value={formik.values.password}
@@ -97,7 +97,7 @@ function Resigter() {
               onBlur={formik.handleBlur}
               name="password"
               type="password"
-              placeholder="Nhập mật khẩu"
+              placeholder="パスワード入力"
               className="form-control"
             />
             {formik.touched.password && formik.errors.password && (
@@ -106,14 +106,14 @@ function Resigter() {
           </div>
           <div className="form-group">
             <label htmlFor="password_confirmation" className="form-label">
-              Nhập lại mật khẩu
+            パスワード再入力
             </label>
             <input
               value={formik.values.confirmPassword}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="confirmPassword"
-              placeholder="Nhập lại mật khẩu"
+              placeholder="パスワード再入力"
               type="password"
               className="form-control"
             />
@@ -124,12 +124,12 @@ function Resigter() {
                 </span>
               )}
           </div>
-          <button className="form-submit">Đăng ký</button>
+          <button className="form-submit">登録</button>
           <div id="them">
-            <span>Đã có tài khoản? </span>
+            <span>すでにアカウントをお持ちですか </span>
             <span>
               <button onClick={() => navigate("/login")}>
-                Đăng nhập tại đây!
+              ここからサインインしてください！
               </button>
             </span>
           </div>

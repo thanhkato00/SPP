@@ -35,7 +35,7 @@ function Search({ cartItems, cartItemsList, removeFromCart }) {
       console.log("ddax truyen nhwng san pham nafy vao", cartItemsList);
       navigate("/cart", { state: { cartItemsList } });
     } else {
-      alert("ban chwa dang nhapus");
+      alert("ログインしてください");
     }
   };
 
@@ -54,9 +54,9 @@ function Search({ cartItems, cartItemsList, removeFromCart }) {
         <div
           style={{ backgroundColor: "white", width: "437px", color: "black" }}
         >
-          <h2>Giỏ hàng</h2>
+          <h2>買い物かご</h2>
           {lastFiveAddedItems.length === 0 ? (
-            <p>Giỏ hàng trống</p>
+            <p>買い物かごは空です</p>
           ) : (
             <ul style={{ listStyleType: "none", padding: "1rem" }}>
               {lastFiveAddedItems.map((item, index) => (
@@ -76,7 +76,7 @@ function Search({ cartItems, cartItemsList, removeFromCart }) {
                     size="sm"
                     onClick={() => removeFromCart(item)}
                   >
-                    Xóa
+                    削除
                   </Button>
                 </li>
               ))}
@@ -86,7 +86,7 @@ function Search({ cartItems, cartItemsList, removeFromCart }) {
             <p
               style={{ textAlign: "left", marginTop: "5px", marginBottom: "0" }}
             >
-              Tổng số sản phẩm: {totalQuantity}
+              商品総数: {totalQuantity}
             </p>
           </div>
         </div>
@@ -116,10 +116,10 @@ function Search({ cartItems, cartItemsList, removeFromCart }) {
             >
               <Form.Control
                 type="search"
-                placeholder="Tìm kiếm"
+                placeholder="検索"
                 // className="me-3 mx-5"
                 style={{ width: "300px" }}
-                aria-label="Tìm kiếm"
+                aria-label="検索"
               />
               <Button variant="outline-success">Tìm kiếm</Button>
             </Form>

@@ -759,6 +759,14 @@
       "confirmPassword": "11111111",
       "username": "thanhkato0000",
       "id": 6
+    },
+    {
+      "userName": "",
+      "email": "minhhieu@gmail.com",
+      "password": "heros147",
+      "confirmPassword": "heros147",
+      "username": "Tran Hieu",
+      "id": 7
     }
   ]
 }
