@@ -18,7 +18,7 @@ function Color({ onSearch }) {
 
   // Render buttons
   const renderColorButtons = () => {
-    const colors = ["Black", "Green", "Yellow", "Orange", "Blue", "Purple", "Pink"];
+    const colors = ["black", "white", "brown", "blue", "red", "yellow","gray","cherryred","pink","mauve"];
 
     return colors.map((color) => (
       <button

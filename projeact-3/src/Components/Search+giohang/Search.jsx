@@ -114,14 +114,14 @@ function Search({ cartItems, cartItemsList, removeFromCart }) {
                 margin: "auto",
               }}
             >
-              <Form.Control
+              {/* <Form.Control
                 type="search"
                 placeholder="検索"
                 // className="me-3 mx-5"
                 style={{ width: "300px" }}
                 aria-label="検索"
               />
-              <Button variant="outline-success">Tìm kiếm</Button>
+              <Button variant="outline-success">Search</Button> */}
             </Form>
           </Nav>
           <OverlayTrigger

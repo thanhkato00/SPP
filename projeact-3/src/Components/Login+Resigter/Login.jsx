@@ -10,7 +10,7 @@ import { useAuth } from "../auth-context";
 function Login() {
   const { login } = useAuth();
   const navigate = useNavigate();
-  const url = "http://localhost:8000/user";
+  const url = "http://localhost:8000/users";
   const formik = useFormik({
     initialValues: {
       email: "",

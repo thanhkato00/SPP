@@ -24,11 +24,11 @@ function Resigter() {
         .min(8, "パスワードは8文字以上である必要があります")
         .required("パスワードを空白にすることはできません"),
       confirmPassword: Yup.string()
-        .oneOf([Yup.ref("パスワード"), null], "パスワードが一致していません")
+        .oneOf([Yup.ref("password"), null], "パスワードが一致していません")
         .required("パスワードの確認を空にすることはできません"),
     }),
     onSubmit: (value) => {
-      const url = "http://localhost:8000/user";
+      const url = "http://localhost:8000/users";
       axios
         .post(url, value)
         .then((res) => {

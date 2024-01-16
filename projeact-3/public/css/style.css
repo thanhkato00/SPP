@@ -164,3 +164,6 @@ ul li {
 ul li button {
   margin: 0 5px; /* Khoảng cách giữa nút cộng và nút trừ */
 }
+.pagination-container {
+  text-align: right !important;
+}
