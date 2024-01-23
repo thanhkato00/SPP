@@ -2,12 +2,11 @@ import React, { useEffect, useState, useMemo } from "react";
 import Navbars from "./Navbars/Navbars";
 import axios from "axios";
 import Pagination from "react-bootstrap/Pagination";
-
+import queryString from "query-string";
 import Product from "./Product/Product";
 import Sidebar from "./Sidebar/Sidebar";
 import Recommended from "./Recommended/Recommended";
 import Search from "./Search+giohang/Search";
-import Footer from "./Footer/Footer";
 
 function HomePage() {
   const [state, setState] = useState([]);
@@ -27,28 +26,44 @@ function HomePage() {
   const [cartItems, setCartItems] = useState([]);
   const [cartItemsList, setCartItemsList] = useState([]);
   const url = "http://localhost:8000/product";
-
-  const loadData =async () => {
-    let url = `http://localhost:8000/product?_page=${currentPage}&_limit=${limitPerPage}`;
+  const loadData = async () => {
+    // Sử dụng object params để xử lý tham số lọc
+    let params = {
+      _page: currentPage,
+      _limit: limitPerPage,
+    };
+  
     if (searchInput) {
-      url = `http://localhost:8000/product?q=${searchInput}&_page=${currentPage}&_limit=${limitPerPage}`;
+      params.q = searchInput;
+    } else {
+      if (filters.category) {
+        params.category = filters.category;
+      }
+  
+      if (filters.color) {
+        params.color = filters.color;
+      }
+  
+      if (filters.price) {
+        params.price_min = filters.price.min;
+        params.price_max = filters.price.max;
+      } else {
+        delete params.price_min;
+        delete params.price_max;
+      }
     }
-    else if(filters.category){
-      url = `http://localhost:8000/product?category=${filters.category}&_page=${currentPage}&_limit=${limitPerPage}`;
-    }
-    else if (filters.color) {
-      url = `http://localhost:8000/product?color=${filters.color}&_page=${currentPage}&_limit=${limitPerPage}`;
-    } else if (filters.price) {
-      url = `http://localhost:8000/product?price_min=${filters.price.min}&price_max=${filters.price.max}&_page=${currentPage}&_limit=${limitPerPage}`;
-    }
+  
+    // Sử dụng query-string để tạo query string từ object params
+    let url = `http://localhost:8000/product?${queryString.stringify(params)}`;
+  
     let result = await axios.get(url);
     const countResult = result.headers["x-total-count"];
-    console.log(countResult);
     const totalResult = Math.ceil(countResult / limitPerPage);
-    console.log(totalResult);
     setTotalPages(totalResult);
     setState(result.data);
   };
+  
+  
   let paginationItems=[];
   for(let i=0;i<totalPages;i++) {
     paginationItems.push(
@@ -124,7 +139,7 @@ function HomePage() {
     );
 
     if (existingProduct) {
-      alert(`San pham ${product.company} ddax toofn taij`);
+      alert(` ${product.company} がカートに追加された。`);
       console.log("da check dk");
     } else {
       // Nếu sản phẩm chưa tồn tại, thêm mới
@@ -135,8 +150,7 @@ function HomePage() {
   const handleSearchButtonClick = () => {
     loadData();
   };
-  console.log(cartItems);
-  console.log(cartItemsList);
+  
   useEffect(() => {
     loadData();
   }, [searchInput,currentPage,handleSearch]);
@@ -180,9 +194,7 @@ function HomePage() {
                 <Pagination.Last onClick={()=>setCurrentPage(totalPages)}/>
               </Pagination>
         </section>
-        <footer style={{marginTop:"190px"}}>
-          <Footer />
-        </footer>
+       
       
     </div>
   );

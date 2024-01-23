@@ -231,7 +231,7 @@ function Cart() {
         <div id="head">
           <div className="class1">
             <div className="card" style={{ width: "18rem", height: "auto" }}>
-              <img src="image/card.png" className="card-img-top" alt="" />
+              <img src="https://paytmblogcdn.paytm.com/wp-content/uploads/2022/01/row200_ATM_What-are-the-Types-of-ATM-Cards-800x500.png" className="card-img-top" alt="" />
               <div className="card-body">
                 <h5 className="card-title">クレジットカード</h5>
                 <p className="card-text">If you want to save time use a card</p>
@@ -246,7 +246,7 @@ function Cart() {
           </div>
           <div className="class2">
             <div className="card" style={{ width: "18rem", height: "auto" }}>
-              <img src="image/Combini.png" className="card-img-top" alt="" />
+              <img src="https://static.minne.com/productimages/131257383/w1600xh1600/f030b7a892af7b5a7a50699dc9ee575b91973400.jpeg?1634058609" className="card-img-top" alt="" />
               <div className="card-body">
                 <h5 className="card-title">コンビニ</h5>
                 <p className="card-text">
@@ -263,7 +263,7 @@ function Cart() {
           </div>
           <div className="class3">
             <div className="card" style={{ width: "18rem", height: "auto" }}>
-              <img src="image/another.jpg" className="card-img-top" alt="" />
+              <img src="  https://lh3.googleusercontent.com/proxy/1gXZUC-7bGw6mH5y6U6jYExqhKTGQpLqPwPjZ8aOX_w8J4T6TzMIKhwBuNf43dEyQiY6kcXEBPZ018kjKZ4W1K1c7AYDrbqZlvfMh_TQOgsphP7QCZ652VcnQ5hLI2G1" className="card-img-top" alt="" />
               <div className="card-body">
                 <h5 className="card-title">Another Buy</h5>
                 <p className="card-text">If you want to pay by phone app</p>
@@ -322,11 +322,11 @@ function Cart() {
           <div className="qr">
             {" "}
             <h4>MyFaceBook</h4>
-            <img src="./Image/MyFaceBook.png" width={200} height={200} />
+            <img src="https://cdn.icon-icons.com/icons2/832/PNG/512/fb_icon-icons.com_66689.png" width={200} height={200} />
           </div>
           <div className="qr">
             <h4>MyYouTube</h4>
-            <img src="./Image/MyYouTube.png" width={200} height={200} />
+            <img src="https://yt3.googleusercontent.com/584JjRp5QMuKbyduM_2k5RlXFqHJtQ0qLIPZpwbUjMJmgzZngHcam5JMuZQxyzGMV5ljwJRl0Q=s176-c-k-c0x00ffffff-no-rj" width={200} height={200} />
           </div>
         </div>
       </>
