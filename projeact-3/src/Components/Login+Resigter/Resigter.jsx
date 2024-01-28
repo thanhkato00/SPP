@@ -14,6 +14,8 @@ function Resigter() {
       email: "",
       password: "",
       confirmPassword: "",
+      phone: "",
+      address: "",
     },
     validationSchema: Yup.object({
       username: Yup.string().required("ユーザー名を空白にすることはできません"),
@@ -26,6 +28,12 @@ function Resigter() {
       confirmPassword: Yup.string()
         .oneOf([Yup.ref("password"), null], "パスワードが一致していません")
         .required("パスワードの確認を空にすることはできません"),
+      phone: Yup.string()
+        .matches(/^[0-9]+$/, "電話番号は数字のみを含む必要があります")
+        .min(10, "電話番号は少なくとも10桁でなければなりません")
+        .max(15, "電話番号は最大15桁です")
+        .required("電話番号を入力してください"),
+      address: Yup.string().required("住所を入力してください"),
     }),
     onSubmit: (value) => {
       const url = "http://localhost:8000/users";
@@ -88,8 +96,42 @@ function Resigter() {
             )}
           </div>
           <div className="form-group">
+            <label htmlFor="password_confirmation" className="form-label">
+              住所
+            </label>
+            <input
+              value={formik.values.address}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              name="address"
+              placeholder="大阪市ーー"
+              type="text"
+              className="form-control"
+            />
+            {formik.touched.address && formik.errors.address && (
+              <span className="form-message">{formik.errors.address}</span>
+            )}
+          </div>
+          <div className="form-group">
+            <label htmlFor="password_confirmation" className="form-label">
+              携帯電話
+            </label>
+            <input
+              value={formik.values.phone}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              name="phone"
+              placeholder="080-xxxx-xxxx"
+              type="number"
+              className="form-control"
+            />
+            {formik.touched.phone && formik.errors.phone && (
+              <span className="form-message">{formik.errors.phone}</span>
+            )}
+          </div>
+          <div className="form-group">
             <label htmlFor="password" className="form-label">
-            パスワード
+              パスワード
             </label>
             <input
               value={formik.values.password}
@@ -106,7 +148,7 @@ function Resigter() {
           </div>
           <div className="form-group">
             <label htmlFor="password_confirmation" className="form-label">
-            パスワード再入力
+              パスワード再入力
             </label>
             <input
               value={formik.values.confirmPassword}
@@ -129,7 +171,7 @@ function Resigter() {
             <span>すでにアカウントをお持ちですか </span>
             <span>
               <button onClick={() => navigate("/login")}>
-              ここからサインインしてください！
+                ここからサインインしてください！
               </button>
             </span>
           </div>

@@ -24,8 +24,7 @@ function Cart() {
   const [quantity, setQuantity] = useState({});
   const [totalPrice, setTotalPrice] = useState(0);
   // Thêm các state cho thông tin người mua
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
@@ -34,7 +33,7 @@ function Cart() {
 
   const handlePayment = () => {
     // Kiểm tra xem thông tin người mua đã được nhập đầy đủ hay chưa
-    if (!firstName || !lastName || !email || !address || !phone) {
+    if (!userName || !email || !address || !phone) {
       // Thông báo lỗi hoặc hiển thị modal lỗi nếu cần
       alert("購入者情報を入力してください。");
       return;
@@ -44,8 +43,7 @@ function Cart() {
     const paymentInfo = {
       cartItems: cartItemList,
       buyerInfo: {
-        firstName: firstName,
-        lastName: lastName,
+        userName: userName,
         email: email,
         address: address,
         phone: phone,
@@ -76,6 +74,28 @@ function Cart() {
   useEffect(() => {
     updateTotalPrice();
   }, [quantity]);
+  useEffect(() => {
+    // Gọi API để lấy thông tin người mua từ backend
+    // Đây là nơi bạn cần thay đổi để phù hợp với API thực tế của bạn
+    // Giả sử bạn có một hàm API có tên là fetchBuyerInfo() trả về một Promise
+    const fetchBuyerInfo = async () => {
+      try {
+        const response = await fetch('http://localhost:8000/users/9'); // Giả sử bạn muốn lấy thông tin của người dùng có id là 9
+        const data = await response.json();
+  
+        // Cập nhật state với thông tin từ API
+        setUserName(data.username || "");
+        setEmail(data.email || "");
+        setAddress(data.address || "");
+        setPhone(data.phone || "");
+      } catch (error) {
+        console.error('Lỗi khi lấy thông tin người mua:', error);
+      }
+    };
+  
+    fetchBuyerInfo();
+  }, []); // useEffect chỉ chạy một lần khi component được render
+  
 
   const increaseQuantity = (index) => {
     setQuantity((prevQuantities) => {
@@ -111,7 +131,7 @@ function Cart() {
         <h3>1.Your Order</h3>
         {/* hiển thị danh sách trong giỏ hàng */}
 
-        <table style={{ width: "100%" }}>
+        <table style={{ width: "100%", marginLeft:"10px"}}>
           <thead>
             <tr>
               <th>Image</th>
@@ -177,24 +197,21 @@ function Cart() {
           </tfoot>
         </table>
         <h3>2.購入者情報</h3>
-        <Form>
-          <Row>
-            <Col>
+        <Form className="p-2">
+        <Row className="mb-3">
+            <Form.Group as={Col} controlId="formGridEmail">
+              <Form.Label>名前</Form.Label>
               <Form.Control
-                placeholder="First name"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
+                placeholder="Username"
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
               />
-              <Form.Control
-                placeholder="Last name"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-              />
-            </Col>
+            </Form.Group>
           </Row>
+        
           <Row className="mb-3">
             <Form.Group as={Col} controlId="formGridEmail">
-              <Form.Label>Email</Form.Label>
+              <Form.Label>メールアドレス</Form.Label>
               <Form.Control
                 type="email"
                 placeholder="Enter email"
@@ -205,7 +222,7 @@ function Cart() {
           </Row>
 
           <Form.Group className="mb-3" controlId="formGridAddress1">
-            <Form.Label>Address</Form.Label>
+            <Form.Label>住所</Form.Label>
             <Form.Control
               placeholder="1234 Main St"
               value={address}
@@ -214,16 +231,12 @@ function Cart() {
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formGridAddress2">
-            <Form.Label>Phone</Form.Label>
+            <Form.Label>携帯電話</Form.Label>
             <Form.Control
               placeholder="080 XXXX XXXX"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
             />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-            <Form.Label>Example textarea</Form.Label>
-            <Form.Control as="textarea" rows={3} />
           </Form.Group>
         </Form>
         <h3>3.Choose a payment method</h3>
@@ -263,9 +276,9 @@ function Cart() {
           </div>
           <div className="class3">
             <div className="card" style={{ width: "18rem", height: "auto" }}>
-              <img src="  https://lh3.googleusercontent.com/proxy/1gXZUC-7bGw6mH5y6U6jYExqhKTGQpLqPwPjZ8aOX_w8J4T6TzMIKhwBuNf43dEyQiY6kcXEBPZ018kjKZ4W1K1c7AYDrbqZlvfMh_TQOgsphP7QCZ652VcnQ5hLI2G1" className="card-img-top" alt="" />
+              <img src="https://theme.zdassets.com/theme_assets/760728/909d9a698d60fb106ef88d66e7742416d0866d57.png" className="card-img-top" alt="" />
               <div className="card-body">
-                <h5 className="card-title">Another Buy</h5>
+                <h5 className="card-title">電子マネー</h5>
                 <p className="card-text">If you want to pay by phone app</p>
                 <input
                   type="radio"
@@ -286,8 +299,7 @@ function Cart() {
             <Modal.Body>
               <h3>支払い成功</h3>
               <p>購入者情報:</p>
-              <p>First name: {firstName}</p>
-              <p>Last name: {lastName}</p>
+              <p>名前: {userName}</p>
               <p>メールアドレス: {email}</p>
               <p>住所: {address}</p>
               <p>電話番号: {phone}</p>
