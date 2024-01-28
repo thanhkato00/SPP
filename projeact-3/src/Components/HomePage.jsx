@@ -7,7 +7,12 @@ import Product from "./Product/Product";
 import Sidebar from "./Sidebar/Sidebar";
 import Recommended from "./Recommended/Recommended";
 import Search from "./Search+giohang/Search";
+<<<<<<< HEAD
+import Footer from "./Footer/Footer";
+import Pagination from "react-bootstrap/Pagination";
+=======
 
+>>>>>>> 834831565716b2f2990c694ba4a7938b22f0f8d6
 function HomePage() {
   const [state, setState] = useState([]);
   const [filters, setFilters] = useState({
@@ -25,6 +30,8 @@ function HomePage() {
   const [totalPages, setTotalPages] = useState(1);
   const [cartItems, setCartItems] = useState([]);
   const [cartItemsList, setCartItemsList] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
   const url = "http://localhost:8000/product";
   const loadData = async () => {
     // Sử dụng object params để xử lý tham số lọc
@@ -147,24 +154,40 @@ function HomePage() {
       setCartItems([{ ...product, quantity: 1 }, ...cartItems.slice(0, 4)]);
     }
   };
+<<<<<<< HEAD
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = currentPage - itemsPerPage;
+  const currentItems = searchResults.slice(indexOfFirstItem, indexOfLastItem);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+=======
   const handleSearchButtonClick = () => {
     loadData();
   };
   
+>>>>>>> 834831565716b2f2990c694ba4a7938b22f0f8d6
   useEffect(() => {
     loadData();
   }, [searchInput,currentPage,handleSearch]);
   return (
     <div>
+<<<<<<< HEAD
+      <div className="spdcontainer">
+        <header style={{ background: "none" }}>
+          <div className="spcontainer">
+=======
       
         <header className="spcontainer">
           <div >
+>>>>>>> 834831565716b2f2990c694ba4a7938b22f0f8d6
             <Navbars />
             <Search
               cartItems={cartItems}
               cartItemsList={cartItemsList}
               removeFromCart={removeFromCart}
+<<<<<<< HEAD
+=======
               searchInput={searchInput}
+>>>>>>> 834831565716b2f2990c694ba4a7938b22f0f8d6
             />
           </div>
         </header>
@@ -183,6 +206,40 @@ function HomePage() {
           </button>
         </form>
           <Recommended onSearch={handleSearch} />
+<<<<<<< HEAD
+          <Sidebar onSearch={handleSearch} />
+          <Product
+            state={searchResults}
+            addToCart={addToCart}
+            paginate={paginate}
+            itemsPerPage={itemsPerPage}
+            totalItems={searchResults.length}
+            pageNumbers={pageNumbers}
+          />
+
+          <Pagination>
+            <Pagination.First onClick={() => paginate(1)} />
+            <Pagination.Prev onClick={() => paginate(currentPage - 1)} />
+
+            {/* Hiển thị các nút trang */}
+            {pageNumbers.map((number) => (
+              <Pagination.Item
+                key={number}
+                active={number === currentPage}
+                onClick={() => paginate(number)}
+              >
+                {number}
+              </Pagination.Item>
+            ))}
+
+            <Pagination.Next onClick={() => paginate(currentPage + 1)} />
+            <Pagination.Last onClick={() => paginate(pageNumbers.length)} />
+          </Pagination>
+        </section>
+      </div>
+
+      <Footer />
+=======
           <Sidebar  onSearch={handleSearch} />
           <Product state={searchResults} addToCart={addToCart} />
           <Pagination style={{ position: 'fixed', bottom: '0', right: '0', zIndex: '1', }}>
@@ -196,6 +253,7 @@ function HomePage() {
         </section>
        
       
+>>>>>>> 834831565716b2f2990c694ba4a7938b22f0f8d6
     </div>
   );
 }
