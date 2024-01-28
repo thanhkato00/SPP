@@ -1,13 +1,18 @@
 import React, { useEffect, useState, useMemo } from "react";
 import Navbars from "./Navbars/Navbars";
 import axios from "axios";
-
+import Pagination from "react-bootstrap/Pagination";
+import queryString from "query-string";
 import Product from "./Product/Product";
 import Sidebar from "./Sidebar/Sidebar";
 import Recommended from "./Recommended/Recommended";
 import Search from "./Search+giohang/Search";
+<<<<<<< HEAD
 import Footer from "./Footer/Footer";
 import Pagination from "react-bootstrap/Pagination";
+=======
+
+>>>>>>> 834831565716b2f2990c694ba4a7938b22f0f8d6
 function HomePage() {
   const [state, setState] = useState([]);
   const [filters, setFilters] = useState({
@@ -15,22 +20,72 @@ function HomePage() {
     color: null,
     category: null,
   });
+  //phan tran
+  const [currentPage, setCurrentPage] = useState(1);
+  //so phan tu trong 1 tran
+  const [limitPerPage, setLimitPerPage] = useState(6);
+  //tong so trang
+  const [searchInput, setSearchInput] = useState("");
+
+  const [totalPages, setTotalPages] = useState(1);
   const [cartItems, setCartItems] = useState([]);
   const [cartItemsList, setCartItemsList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const url = "http://localhost:8000/product";
-
-  const loadData = () => {
-    axios
-      .get(url)
-      .then((response) => {
-        setState(response.data);
-      })
-      .catch((err) => console.log(err));
+  const loadData = async () => {
+    // Sử dụng object params để xử lý tham số lọc
+    let params = {
+      _page: currentPage,
+      _limit: limitPerPage,
+    };
+  
+    if (searchInput) {
+      params.q = searchInput;
+    } else {
+      if (filters.category) {
+        params.category = filters.category;
+      }
+  
+      if (filters.color) {
+        params.color = filters.color;
+      }
+  
+      if (filters.price) {
+        params.price_min = filters.price.min;
+        params.price_max = filters.price.max;
+      } else {
+        delete params.price_min;
+        delete params.price_max;
+      }
+    }
+  
+    // Sử dụng query-string để tạo query string từ object params
+    let url = `http://localhost:8000/product?${queryString.stringify(params)}`;
+  
+    let result = await axios.get(url);
+    const countResult = result.headers["x-total-count"];
+    const totalResult = Math.ceil(countResult / limitPerPage);
+    setTotalPages(totalResult);
+    setState(result.data);
   };
+  
+  
+  let paginationItems=[];
+  for(let i=0;i<totalPages;i++) {
+    paginationItems.push(
+      <Pagination.Item
+        key={i}
+        onClick={() => setCurrentPage(i+1)}
+        active={i+1 === currentPage}
+      >
+        {i+1}
+      </Pagination.Item>
+    )
+  }
 
   const handleSearch = (newFilters) => {
+    setCurrentPage(1);
     console.log("Giá trị trả về: ", newFilters);
 
     // Kiểm tra nếu đã chọn giá tiền và giống nhau, thì thay đổi giá trị
@@ -91,7 +146,7 @@ function HomePage() {
     );
 
     if (existingProduct) {
-      alert(`San pham ${product.company} ddax toofn taij`);
+      alert(` ${product.company} がカートに追加された。`);
       console.log("da check dk");
     } else {
       // Nếu sản phẩm chưa tồn tại, thêm mới
@@ -99,28 +154,59 @@ function HomePage() {
       setCartItems([{ ...product, quantity: 1 }, ...cartItems.slice(0, 4)]);
     }
   };
+<<<<<<< HEAD
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = currentPage - itemsPerPage;
   const currentItems = searchResults.slice(indexOfFirstItem, indexOfLastItem);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+=======
+  const handleSearchButtonClick = () => {
+    loadData();
+  };
+  
+>>>>>>> 834831565716b2f2990c694ba4a7938b22f0f8d6
   useEffect(() => {
     loadData();
-  }, []);
+  }, [searchInput,currentPage,handleSearch]);
   return (
     <div>
+<<<<<<< HEAD
       <div className="spdcontainer">
         <header style={{ background: "none" }}>
           <div className="spcontainer">
+=======
+      
+        <header className="spcontainer">
+          <div >
+>>>>>>> 834831565716b2f2990c694ba4a7938b22f0f8d6
             <Navbars />
             <Search
               cartItems={cartItems}
               cartItemsList={cartItemsList}
               removeFromCart={removeFromCart}
+<<<<<<< HEAD
+=======
+              searchInput={searchInput}
+>>>>>>> 834831565716b2f2990c694ba4a7938b22f0f8d6
             />
           </div>
         </header>
         <section>
+        <form className="d-flex p-3" onSubmit={(e)=>{e.preventDefault();handleSearchButtonClick();}}>
+          <input
+            className="form-control me-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+          />
+          <button className="btn btn-outline-success" type="submit">
+            Search
+          </button>
+        </form>
           <Recommended onSearch={handleSearch} />
+<<<<<<< HEAD
           <Sidebar onSearch={handleSearch} />
           <Product
             state={searchResults}
@@ -153,6 +239,21 @@ function HomePage() {
       </div>
 
       <Footer />
+=======
+          <Sidebar  onSearch={handleSearch} />
+          <Product state={searchResults} addToCart={addToCart} />
+          <Pagination style={{ position: 'fixed', bottom: '0', right: '0', zIndex: '1', }}>
+                <Pagination.First onClick={()=>setCurrentPage(1)} />
+                <Pagination.Prev onClick={()=>setCurrentPage(currentPage-1)}/>
+                {paginationItems}
+
+                <Pagination.Next onClick={()=>setCurrentPage(currentPage+1)}/>
+                <Pagination.Last onClick={()=>setCurrentPage(totalPages)}/>
+              </Pagination>
+        </section>
+       
+      
+>>>>>>> 834831565716b2f2990c694ba4a7938b22f0f8d6
     </div>
   );
 }
